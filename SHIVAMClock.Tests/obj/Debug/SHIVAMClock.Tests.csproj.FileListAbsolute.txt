@@ -1,0 +1,10 @@
+D:\SHIVAMClock\SHIVAMClock.Tests\bin\Debug\SHIVAMClock.Tests.dll.config
+D:\SHIVAMClock\SHIVAMClock.Tests\bin\Debug\SHIVAMClock.Tests.dll
+D:\SHIVAMClock\SHIVAMClock.Tests\bin\Debug\SHIVAMClock.Tests.pdb
+D:\SHIVAMClock\SHIVAMClock.Tests\bin\Debug\SHIVAMClock.dll
+D:\SHIVAMClock\SHIVAMClock.Tests\bin\Debug\EntityFramework.dll
+D:\SHIVAMClock\SHIVAMClock.Tests\bin\Debug\SHIVAMClock.pdb
+D:\SHIVAMClock\SHIVAMClock.Tests\bin\Debug\EntityFramework.xml
+D:\SHIVAMClock\SHIVAMClock.Tests\obj\Debug\SHIVAMClock.Tests.csprojResolveAssemblyReference.cache
+D:\SHIVAMClock\SHIVAMClock.Tests\obj\Debug\SHIVAMClock.Tests.dll
+D:\SHIVAMClock\SHIVAMClock.Tests\obj\Debug\SHIVAMClock.Tests.pdb

@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="row-fluid">
+        <div class="span8 pull-left">
+            <legend>Clock </legend>
+            <div id="clock_id">
+            </div>
+        </div>
+        <div class="span3 pull-right">
+            <legend>Select A timezone </legend>
+            <div class="controls">
+                <select id="Timezone" class="styled-select">
+                    <option value="+5.5">India</option>
+                    <option value="+8">Singapore</option>
+                    <option value="+1">London</option>
+                </select>
+            </div>
+
+            <script type="text/javascript">                    draw_clock(500, "#f5f5f5", 7, "#CC6699", 4, "#000000", 35, "#CC6699", 42, "#030667", 45, 8, "#CC6699")</script>
+        </div>
+    </div>
+</div>

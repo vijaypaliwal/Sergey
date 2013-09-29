@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Analog Clock</title>
+
+
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/raphael-min.js")"></script>
+
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        // Variable decalrations for Current date,time and offset
+
+        var date1, now, hours, minutes, seconds, offset;
+
+
+
+        //Draw clock using raphel.js 
+
+        function draw_clock(width, fillColor, strokeWidth, strokeColor, pinWidth, pinColor, hourHandLengh, hourHandColor, minuteHandLengh, minuteHandColor, secondHandLengh, secondHandExceeding, secondHandColor) {
+            canvas = Raphael("clock_id", width, width);
+            var clock = canvas.circle(width * .5, width * .5, width * .475);
+            clock.attr({ "fill": fillColor, "stroke": strokeColor, "stroke-width": (width * .025) })
+            var hour_sign;
+            for (i = 0; i < 12; i++) {
+                var start_x = width * .5 + Math.round((width * .4) * Math.cos(30 * i * Math.PI / 180));
+                var start_y = width * .5 + Math.round((width * .4) * Math.sin(30 * i * Math.PI / 180));
+                var end_x = width * .5 + Math.round((width * .45) * Math.cos(30 * i * Math.PI / 180));
+                var end_y = width * .5 + Math.round((width * .45) * Math.sin(30 * i * Math.PI / 180));
+                hour_sign = canvas.path("M" + start_x + " " + start_y + "L" + end_x + " " + end_y);
+            }
+
+            hour_hand = canvas.path("M" + width * .5 + " " + width * .5 + "L" + width * .5 + " " + (width * .25) + "");
+            hour_hand.attr({ stroke: hourHandColor, "stroke-width": width * .03 });
+            minute_hand = canvas.path("M" + width * .5 + " " + width * .5 + "L" + width * .5 + " " + (width * .2) + "");
+            minute_hand.attr({ stroke: minuteHandColor, "stroke-width": width * .02 });
+            second_hand = canvas.path("M" + width * .5 + " " + (width * .55) + "L" + width * .5 + " " + (width * .125) + "");
+            second_hand.attr({ stroke: secondHandColor, "stroke-width": width * .01 });
+            var pin = canvas.circle(width * .5, width * .5, width * .025);
+            pin.attr("fill", pinColor);
+            update_clock(width)
+            setInterval("update_clock(" + width + ")", 1000);
+        }
+
+
+        // Update clock hands according to system date and time
+
+        function update_clock(width) {
+            var now = calcTime(offset);
+            hours = now.getHours();
+            minutes = now.getMinutes();
+            seconds = now.getSeconds();
+
+            hour_hand.rotate(30 * hours + (minutes / 2.5), width / 2, width / 2);
+
+            minute_hand.rotate(6 * minutes, width / 2, width / 2);
+
+            second_hand.rotate(6 * seconds, width / 2, width / 2);
+        }
+
+
+
+
+
+
+
+        function calcTime(offset1) {
+
+            // create Date object for current location
+            d = new Date();
+
+            // convert to msec
+            // add local time zone offset 
+            // get UTC time in msec
+            utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+
+            // create new Date object for different city
+            // using supplied offset
+            nd = new Date(utc + (3600000 * offset1));
+
+            // return time as a string
+            return nd;
+
+        }
+
+
+        $(document).ready(function () {
+            offset = $("#Timezone").val();
+
+            // Set offset on Timezone change method 
+
+            $("#Timezone").change(function () {
+                offset = $("#Timezone").val();
+                update_clock("500");
+            });
+        });
+
+    </script>
+
+
+
+
+</head>
+<body>
+    <div class="page">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">SHIVAM Javascript Watch</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/Home/Index">Home</a></li>
+                        <li><a href="/Home/about">About</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+        <section id="main">
+            @RenderBody()
+        </section>
+        <footer>
+        </footer>
+    </div>
+</body>
+</html>
